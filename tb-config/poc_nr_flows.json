@@ -1,0 +1,670 @@
+[
+    {
+        "id": "5a168e1320a85c4f",
+        "type": "tab",
+        "label": "integration",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "f4a1e02c4c995569",
+        "type": "tab",
+        "label": "sim-ipc",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "27dd131e9e32081b",
+        "type": "tab",
+        "label": "http api",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "24d5674be81c3813",
+        "type": "tab",
+        "label": "other sim ipcs",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "d604dc954f39a456",
+        "type": "tls-config",
+        "name": "gateway-cert",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "gateway.pem.crt",
+        "keyname": "gateway-private.pem.key",
+        "caname": "AmazonRootCA1.pem",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "bf725c4a2a0e5123",
+        "type": "mqtt-broker",
+        "name": "aws iot core",
+        "broker": "a1r35mvef83ebe-ats.iot.us-east-1.amazonaws.com",
+        "port": "8883",
+        "tls": "d604dc954f39a456",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "9acd63892c91338f",
+        "type": "mqtt-broker",
+        "name": "tb-core",
+        "broker": "ac4bf7fb4de46497bbc21caa6f759322-c419e382bff8b0dd.elb.us-east-1.amazonaws.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "0ef168af69c4448b",
+        "type": "tls-config",
+        "name": "ipc-cert",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "certificate.pem.crt",
+        "keyname": "private.pem.key",
+        "caname": "AmazonRootCA1.pem",
+        "servername": "",
+        "verifyservercert": true,
+        "alpnprotocol": ""
+    },
+    {
+        "id": "fbd8869001824d6d",
+        "type": "mqtt-broker",
+        "name": "aws iot core device",
+        "broker": "a1r35mvef83ebe-ats.iot.us-east-1.amazonaws.com",
+        "port": "8883",
+        "tls": "0ef168af69c4448b",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": true,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "8a83b90fb7eddca1",
+        "type": "mqtt in",
+        "z": "5a168e1320a85c4f",
+        "name": "aws-iot-subscriber",
+        "topic": "things/+/upload",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "bf725c4a2a0e5123",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "04529a337f2f7fc7"
+            ]
+        ]
+    },
+    {
+        "id": "8f68bef2d96e54f4",
+        "type": "debug",
+        "z": "5a168e1320a85c4f",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "68dcae28d7410d53",
+        "type": "mqtt out",
+        "z": "5a168e1320a85c4f",
+        "name": "tb-publisher",
+        "topic": "v1/gateway/telemetry",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9acd63892c91338f",
+        "x": 650,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "04529a337f2f7fc7",
+        "type": "function",
+        "z": "5a168e1320a85c4f",
+        "name": "convertor",
+        "func": "var seg = msg.topic.split('/');\nvar thingName = seg[1];\n\nvar values = [JSON.parse(msg.payload)];\n\nvar payload = {};\npayload[thingName] = values;\n\nmsg.payload = payload;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 80,
+        "wires": [
+            [
+                "8f68bef2d96e54f4",
+                "68dcae28d7410d53"
+            ]
+        ]
+    },
+    {
+        "id": "44a03099aa3bd6c3",
+        "type": "mqtt in",
+        "z": "5a168e1320a85c4f",
+        "name": "tb-rpc-subscriber",
+        "topic": "v1/gateway/rpc",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "9acd63892c91338f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 420,
+        "wires": [
+            [
+                "f517e664bc6c153b"
+            ]
+        ]
+    },
+    {
+        "id": "49b52a296ccd495b",
+        "type": "debug",
+        "z": "5a168e1320a85c4f",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 450,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "f517e664bc6c153b",
+        "type": "function",
+        "z": "5a168e1320a85c4f",
+        "name": "rpc-convertor",
+        "func": "var payload = JSON.parse(msg.payload);\nvar topic = \"$aws/things/\" + payload.device + \"/shadow/update\";\n\nvar np = {};\nvar state = {};\nvar desired = {};\nif (payload.data.method === \"setValue_switch2\") {\n    desired[\"angle\"] = 100;\n    desired[\"width\"] = 1280;\n    desired[\"height\"] = 720;\n}\nif (payload.data.method === \"setValue_switch1\") {\n    desired[\"angle\"] = 100;\n    desired[\"width\"] = 640;\n    desired[\"height\"] = 480;\n}\n\ndesired[\"switch\"] = payload.data.params ? 1 : 0;\nstate[\"desired\"] = desired;\nnp[\"state\"] = state;\n\nmsg.topic = topic;\nmsg.payload = np;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 420,
+        "wires": [
+            [
+                "4dd1ecdbf9531777",
+                "daa9663a8d196210"
+            ]
+        ]
+    },
+    {
+        "id": "4dd1ecdbf9531777",
+        "type": "mqtt out",
+        "z": "5a168e1320a85c4f",
+        "name": "aws-iot-publisher",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "bf725c4a2a0e5123",
+        "x": 730,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "64312096605a184c",
+        "type": "file",
+        "z": "5a168e1320a85c4f",
+        "name": "写入状态",
+        "filename": "state",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 440,
+        "y": 640,
+        "wires": [
+            [
+                "49b52a296ccd495b"
+            ]
+        ]
+    },
+    {
+        "id": "daa9663a8d196210",
+        "type": "switch",
+        "z": "5a168e1320a85c4f",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "enzhi_camera_stream",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 430,
+        "y": 520,
+        "wires": [
+            [
+                "64312096605a184c"
+            ]
+        ]
+    },
+    {
+        "id": "9b16050aae9ec480",
+        "type": "inject",
+        "z": "f4a1e02c4c995569",
+        "name": "loop",
+        "props": [
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "things/enzhi_camera_stream/upload",
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "59df5885d3423c93"
+            ]
+        ]
+    },
+    {
+        "id": "5b95dbd7f80c7aea",
+        "type": "function",
+        "z": "f4a1e02c4c995569",
+        "name": "prepare data",
+        "func": "var angle = Math.floor(Math.random()*30);\nvar battery = 62;\nvar payload = {};\nvar state = null;\n\nif (msg.payload) {\n    state = JSON.parse(msg.payload).state;\n}\n\npayload.switch = 0;\n\nif (state) {\n    payload.switch = state.desired.switch;\n}\n\npayload.angle = angle;\npayload.battery = battery;\n\nmsg.payload = payload;\nmsg.topic = \"things/enzhi_camera_stream/upload\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 430,
+        "y": 200,
+        "wires": [
+            [
+                "ad723f2da7903bd0"
+            ]
+        ]
+    },
+    {
+        "id": "ad723f2da7903bd0",
+        "type": "mqtt out",
+        "z": "f4a1e02c4c995569",
+        "name": "aws iot publisher",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fbd8869001824d6d",
+        "x": 690,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "59df5885d3423c93",
+        "type": "file in",
+        "z": "f4a1e02c4c995569",
+        "name": "读取状态",
+        "filename": "state",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 300,
+        "y": 300,
+        "wires": [
+            [
+                "5b95dbd7f80c7aea",
+                "742ed094aa6278cb"
+            ]
+        ]
+    },
+    {
+        "id": "742ed094aa6278cb",
+        "type": "debug",
+        "z": "f4a1e02c4c995569",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "955a63820fdc8a3b",
+        "type": "catch",
+        "z": "f4a1e02c4c995569",
+        "name": "",
+        "scope": [
+            "59df5885d3423c93"
+        ],
+        "uncaught": false,
+        "x": 360,
+        "y": 100,
+        "wires": [
+            [
+                "5b95dbd7f80c7aea"
+            ]
+        ]
+    },
+    {
+        "id": "e4cde38f4e8b1869",
+        "type": "http in",
+        "z": "27dd131e9e32081b",
+        "name": "video event interface",
+        "url": "/api/v1/event",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 160,
+        "wires": [
+            [
+                "13d40255d737839d"
+            ]
+        ]
+    },
+    {
+        "id": "79563ba0fe1ebef8",
+        "type": "debug",
+        "z": "27dd131e9e32081b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 370,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "b03463a3d4b25ad8",
+        "type": "http response",
+        "z": "27dd131e9e32081b",
+        "name": "video event response",
+        "statusCode": "200",
+        "headers": {
+            "Connection": "close"
+        },
+        "x": 640,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "13d40255d737839d",
+        "type": "function",
+        "z": "27dd131e9e32081b",
+        "name": "event-parser",
+        "func": "var event = JSON.parse(msg.payload);\nvar message = JSON.parse(event.Message);\n\nvar eventName = message.eventNamespace.type;\nvar labels = message.labels ? message.labels : message.streamProcessingResults.message;\nvar payload = [{\n    eventName: eventName,\n    labels: labels\n}]\n\nvar seg = message.inputInformation.kinesisVideo.streamArn.split('/');\nvar thingName = seg[1];\n\nvar np = {};\nnp[thingName] = payload;\n\nmsg.payload = np;\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 120,
+        "wires": [
+            [
+                "b03463a3d4b25ad8",
+                "1caa101a57bd083e",
+                "79563ba0fe1ebef8"
+            ]
+        ]
+    },
+    {
+        "id": "1caa101a57bd083e",
+        "type": "mqtt out",
+        "z": "27dd131e9e32081b",
+        "name": "tb-publisher",
+        "topic": "v1/gateway/telemetry",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9acd63892c91338f",
+        "x": 650,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "91b8e30d9475d2a4",
+        "type": "inject",
+        "z": "24d5674be81c3813",
+        "name": "loop",
+        "props": [],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 150,
+        "y": 240,
+        "wires": [
+            [
+                "3c2e35bfbfdec887",
+                "364923711133f396",
+                "b7f89da83d266e9d",
+                "0bae90d49fbe2a86",
+                "430884674e2bdb81"
+            ]
+        ]
+    },
+    {
+        "id": "3c2e35bfbfdec887",
+        "type": "function",
+        "z": "24d5674be81c3813",
+        "name": "prepare data",
+        "func": "var angle = Math.floor(Math.random()*30);\nvar battery = 30;\nvar payload = {};\n\npayload.switch = 0;\npayload.angle = angle;\npayload.battery = battery;\n\nmsg.payload = payload;\nmsg.topic = \"things/ab3_ipc001/upload\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 120,
+        "wires": [
+            [
+                "cd17c4982075a6bb"
+            ]
+        ]
+    },
+    {
+        "id": "cd17c4982075a6bb",
+        "type": "mqtt out",
+        "z": "24d5674be81c3813",
+        "name": "aws iot publisher",
+        "topic": "",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "fbd8869001824d6d",
+        "x": 710,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "364923711133f396",
+        "type": "function",
+        "z": "24d5674be81c3813",
+        "name": "prepare data",
+        "func": "var angle = Math.floor(Math.random()*30);\nvar battery = 50;\nvar payload = {};\n\npayload.switch = 0;\npayload.angle = angle;\npayload.battery = battery;\n\nmsg.payload = payload;\nmsg.topic = \"things/ab3_ipc002/upload\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 180,
+        "wires": [
+            [
+                "cd17c4982075a6bb"
+            ]
+        ]
+    },
+    {
+        "id": "b7f89da83d266e9d",
+        "type": "function",
+        "z": "24d5674be81c3813",
+        "name": "prepare data",
+        "func": "var angle = Math.floor(Math.random()*30);\nvar battery = 88;\nvar payload = {};\n\npayload.switch = 0;\npayload.angle = angle;\npayload.battery = battery;\n\nmsg.payload = payload;\nmsg.topic = \"things/ab3_ipc003/upload\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 240,
+        "wires": [
+            [
+                "cd17c4982075a6bb"
+            ]
+        ]
+    },
+    {
+        "id": "0bae90d49fbe2a86",
+        "type": "function",
+        "z": "24d5674be81c3813",
+        "name": "prepare data",
+        "func": "var angle = Math.floor(Math.random()*30);\nvar battery = 72;\nvar payload = {};\n\npayload.switch = 0;\npayload.angle = angle;\npayload.battery = battery;\n\nmsg.payload = payload;\nmsg.topic = \"things/ab3_ipc004/upload\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 300,
+        "wires": [
+            [
+                "cd17c4982075a6bb"
+            ]
+        ]
+    },
+    {
+        "id": "430884674e2bdb81",
+        "type": "function",
+        "z": "24d5674be81c3813",
+        "name": "prepare data",
+        "func": "var angle = Math.floor(Math.random()*30);\nvar battery = 24;\nvar payload = {};\n\npayload.switch = 0;\npayload.angle = angle;\npayload.battery = battery;\n\nmsg.payload = payload;\nmsg.topic = \"things/ab3_ipc005/upload\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 360,
+        "wires": [
+            [
+                "cd17c4982075a6bb"
+            ]
+        ]
+    }
+]
